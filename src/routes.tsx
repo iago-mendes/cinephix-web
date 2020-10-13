@@ -22,48 +22,48 @@ import ViewMedia from './pages/Media/view'
 import AddMedia from './pages/Media/add'
 import EditMedia from  './pages/Media/edit'
 
-const ExactRoute = ({component: Component, path, exact}: {component: any, path: string, exact: any}) =>
-{
-    return (
-        <Route
-            exact
-            path={path}
-            render={props => isAdmin() ? <Component {...props} /> : (
-                <Redirect to={{pathname: '/login', state: {from: props.location}}} />
-            )}
-        />
-    )
-}
-const CRUDRoute = ({component: Component, path}: {component: any, path: string}) =>
-    {
-        return (
-            <Route
-                path={path}
-                render={props => isAdmin() ? <Component {...props} /> : (
-                    <Redirect to={{pathname: '/login', state: {from: props.location}}} />
-                )}
-            />
-        )
-    }
+// const ExactRoute = ({component: Component, path, exact}: {component: any, path: string, exact: any}) =>
+// {
+//     return (
+//         <Route
+//             exact
+//             path={path}
+//             render={props => isAdmin() ? <Component {...props} /> : (
+//                 <Redirect to={{pathname: '/login', state: {from: props.location}}} />
+//             )}
+//         />
+//     )
+// }
+// const CRUDRoute = ({component: Component, path}: {component: any, path: string}) =>
+// {
+//     return (
+//         <Route
+//             path={path}
+//             render={props => isAdmin() ? <Component {...props} /> : (
+//                 <Redirect to={{pathname: '/login', state: {from: props.location}}} />
+//             )}
+//         />
+//     )
+// }
 
 const Routes = () => (
     <BrowserRouter>
         <Switch>
             <Route path='/login' component={Login} />
-            <ExactRoute exact path='/' component={Home} />
-            <ExactRoute exact path='/celebrities' component={Celebrities} />
-                <CRUDRoute path='/celebrities/view/:id' component={ViewCelebritiy} />
-                <CRUDRoute path='/celebrities/add' component={AddCelebrity} />
-                <CRUDRoute path='/celebrities/edit/:id' component={EditCelebrity} />
-            <ExactRoute exact path='/characters' component={Characters} />
-                <CRUDRoute path='/characters/view/:id' component={ViewCharacter} />
-                <CRUDRoute path='/characters/add' component={AddCharacter} />
-                <CRUDRoute path='/characters/edit/:id' component={EditCharacter} />
-            <ExactRoute exact path='/media' component={Media} />
-                <CRUDRoute path='/media/view/:id' component={ViewMedia} />
-                <CRUDRoute path='/media/add' component={AddMedia} />
-                <CRUDRoute path='/media/edit/:id' component={EditMedia} />
-            <CRUDRoute path='/classifications' component={Classifications} />
+            <Route exact path='/' component={Home} />
+            <Route exact path='/celebrities' component={Celebrities} />
+                <Route path='/celebrities/view/:id' component={ViewCelebritiy} />
+                <Route path='/celebrities/add' component={AddCelebrity} />
+                <Route path='/celebrities/edit/:id' component={EditCelebrity} />
+            <Route exact path='/characters' component={Characters} />
+                <Route path='/characters/view/:id' component={ViewCharacter} />
+                <Route path='/characters/add' component={AddCharacter} />
+                <Route path='/characters/edit/:id' component={EditCharacter} />
+            <Route exact path='/media' component={Media} />
+                <Route path='/media/view/:id' component={ViewMedia} />
+                <Route path='/media/add' component={AddMedia} />
+                <Route path='/media/edit/:id' component={EditMedia} />
+            <Route path='/classifications' component={Classifications} />
         </Switch>
     </BrowserRouter>
 )
