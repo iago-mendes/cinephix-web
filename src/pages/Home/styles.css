@@ -1,0 +1,42 @@
+.info
+{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    height: 100%;
+    justify-content: start;
+    padding: 50px;
+    padding-left: 35vw;
+    padding-right: 35vw;
+    width: 100%;
+}
+
+.info h2
+{
+    background-color: var(--darked-red);
+    color: var(--orange);
+    font-family: Ubuntu;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+}
+
+.info li
+{
+    align-items: center;
+    background-color: var(--darked-red);
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    padding: 10px;
+    width: 100%;
+}
+
+.info h3
+{
+    color: var(--orange);
+    font-family: Ubuntu;
+    font-weight: bold;
+}

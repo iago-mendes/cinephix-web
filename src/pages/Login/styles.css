@@ -1,0 +1,110 @@
+#loginContainer
+{
+    align-items: center;
+    background-image: url('../../assets/background.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    width: 100vw;
+    padding: 3em;
+}
+
+#logoLogin
+{
+    align-items: center;
+    display: flex;
+    height: fit-content;
+    justify-content: center;
+    width: 100%;
+}
+
+#logoLogin img
+{
+    height: auto;
+    max-width: 500px;
+    width: 60%;
+}
+
+#prompt
+{
+    align-items: center;
+    display: flex;
+    height: 30%;
+    justify-content: center;
+    margin-top: 2em;
+    width: 100%;
+}
+
+#prompt h1
+{
+    color: var(--orange);
+    font-family: Ubuntu;
+    font-size: 2em;
+    max-width: 800px;
+    text-align: justify;
+    width: 75%;
+}
+
+#password
+{
+    align-items: center;
+    display: flex;
+    gap: 2em;
+    height: 30%;
+    /*padding: 5em;*/
+    justify-content: center;
+    width: 100%;
+}
+
+#password input
+{
+    border-radius: 2em;
+    border-width: 0em;
+    height: 3.5em;
+    outline: none;
+    padding: 10px;
+    padding-left: 50px;
+    padding-right: 50px;
+    transition: 0.5s;
+    width: 20em;
+}
+
+#password input:hover
+{
+    border-radius: 0;
+}
+
+#submitLink
+{
+    height: fit-content;
+    text-decoration: none;
+    width: fit-content;
+}
+
+#submitLink button
+{
+    align-items: center;
+    background-color: var(--orange);
+    border: none;
+    border-radius: 2em;
+    color: var(--red);
+    cursor: pointer;
+    display: flex;
+    font-family: Ubuntu;
+    font-size: 1.5em;
+    font-weight: bold;
+    gap: 0.5em;
+    height: 50px;
+    justify-content: center;
+    outline: none;
+    transition: 0.3s;
+    width: 150px;
+}
+
+#submitLink button:hover
+{
+    transform: scale(1.1);
+}

@@ -1,0 +1,52 @@
+:root
+{
+  --blue: #161C50;
+  --darked-blue: #0C102C;
+  --red: #420C14;
+  --darked-red: #26070B;
+  --green: #245655;
+  --darked-green: #1A3D3C;
+  --orange: #FF8A00;
+  --white: #D4D4F7;
+}
+
+*
+{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#body
+{
+  -webkit-font-smoothing: antialiased;
+  background-color: var(--red);
+}
+
+h1
+{
+  color: var(--orange);
+  font-family: Ubuntu;
+  font-weight: bold;
+}
+
+#container
+{
+  height: 100vh;
+  overflow: hidden;
+  padding: 10px;
+  padding-top: 70px;
+  width: 100%;
+}
+
+#container2
+{
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  justify-content: center;
+  padding: 10px;
+  padding-top: 70px;
+  width: 100%;
+}

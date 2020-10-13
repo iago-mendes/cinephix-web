@@ -1,0 +1,77 @@
+#tabsContainer
+{
+    background-color: var(--darked-red);
+    display: flex;
+    height: 60px;
+    padding: 5px;
+    position: fixed;
+    top: 0; 
+    width: 100%;
+}
+
+#logoTabs
+{
+    display: flex;
+    height: 100%;
+    justify-content: left;
+    padding-left: 25px;
+    padding-top: 5px;
+    width: 25%;
+}
+
+#logoLink
+{
+    height: 100%;
+    width: fit-content;
+}
+
+#logoLink img
+{
+    height: 100%;
+    max-width: 200px;
+    transition: 0.5s;
+    width: auto;
+}
+
+#logoLink img:hover
+{
+    transform: scale(1.2);
+}
+
+#menu
+{
+    height: 50px;
+    width: 75%;
+}
+
+#menu ul
+{
+    display: flex;
+    height: inherit;
+    justify-content: space-around;
+}
+
+#menu li
+{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    width: 200px;
+}
+
+.itemLink
+{
+    color: var(--orange);
+    font-family: Ubuntu;
+    font-size: 1.4em;
+    font-weight: bold;
+    padding: 12px 41px;
+    text-decoration: none;
+    transition: 0.5s;
+}
+
+.itemLink:hover
+{
+    transform: scale(1.2);
+}
