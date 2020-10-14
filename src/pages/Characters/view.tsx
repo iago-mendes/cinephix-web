@@ -7,40 +7,42 @@ import api from '../../services/api'
 
 interface CelebrityMedia
 {
-    id: number
+    id: string
     name: string
     image: string
 }
 
 const defaultCelebrityMedia =
 {
-    id: 0,
+    id: 'default',
     name: 'default',
     image: 'default'
 }
 
 interface Info
 {
+    id: string
     name: string
     image: string
-    celebrities_media: Array<{celebrity: CelebrityMedia, media: CelebrityMedia}>
+    relations: Array<{celebrity: CelebrityMedia, media: CelebrityMedia}>
 }
 
 const defaultInfo =
 {
+    id: 'default',
     name: 'default',
     image: 'default',
-    celebrities_media: [{celebrity: defaultCelebrityMedia, media: defaultCelebrityMedia}]
+    relations: [{celebrity: defaultCelebrityMedia, media: defaultCelebrityMedia}]
 }
 
 const View = () =>
 {
-    const {id} = useParams()
+    const {id} = useParams<{id: string}>()
     const [info, setInfo] = useState<Info>(defaultInfo)
 
     useEffect(() =>
     {
-        api.get(`characters/${id}`).then(res => setInfo(res.data))
+        api.get(`/characters/${id}`).then(res => setInfo(res.data))
     }, [id])
 
     return (
@@ -54,7 +56,7 @@ const View = () =>
                     <h1>{info.name}</h1>
                     <ul>
                         <h2>Celebrities & Media</h2>
-                        {info.celebrities_media.map(({celebrity, media}) => (
+                        {info.relations.map(({celebrity, media}) => (
                             <li className="celebrityMedia" key={`${celebrity.id}-${media.id}`}>
                                 <div className="celebrity">
                                     <img src={celebrity.image} alt={celebrity.name}/>

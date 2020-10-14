@@ -9,14 +9,14 @@ const Home = () =>
     const [celebrities, setCelebrities] = useState<number>(0)
     const [characters, setCharacters] = useState<number>(0)
     const [media, setMedia] = useState<number>(0)
-    const [classifications, setClassifications] = useState<number>(0)
+    const [genres, setGenres] = useState<number>(0)
 
     useEffect(() => // collect number of items registred
     {
         api.get('celebrities').then(res => setCelebrities(res.data.length))
         api.get('characters').then(res => setCharacters(res.data.length))
         api.get('media').then(res => setMedia(res.data.length))
-        api.get('classifications').then(res => setClassifications(res.data.length))
+        api.get('genres').then(res => setGenres(res.data.length))
     }, [])
 
     return (
@@ -50,12 +50,12 @@ const Home = () =>
                                 <h3>{media}</h3>
                             </div>
                         </li>
-                        <li key="classifications">
+                        <li key="genres">
                             <div className="category">
-                                <h3>Classifications</h3>
+                                <h3>Genres</h3>
                             </div>
                             <div className="number">
-                                <h3>{classifications}</h3>
+                                <h3>{genres}</h3>
                             </div>
                         </li>
                 </ul>

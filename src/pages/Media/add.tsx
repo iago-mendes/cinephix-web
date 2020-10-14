@@ -7,15 +7,15 @@ import Tabs from '../../components/Tabs'
 import Dropzone from '../../components/Dropzone'
 import api from '../../services/api'
 
-interface Classification
+interface Genre
 {
-    id: number
+    id: string
     name: string
 }
 
-const defaultClassification =
+const defaultGenre =
 {
-    id: 0,
+    id: '',
     name: ''
 }
 
@@ -35,22 +35,18 @@ const defaultType =
 
 const Add = () =>
 {
-    const [classificationsList, setClassificationsList] = useState<Classification[]>([defaultClassification])
+    const [genresList, setGenresList] = useState<Genre[]>([defaultGenre])
 
     const [selectedFile, setSelectedFile] = useState<File>()
     const [name, setName] = useState('')
     const [type, setType] = useState<Type>(defaultType)
-    const [classifications, setClassifications] = useState<Classification[]>(
-    [{
-        id: 0,
-        name: ''
-    }])
+    const [genres, setGenres] = useState<Genre[]>([])
 
     const history = useHistory()
 
-    useEffect(() => // collect list of classifications
+    useEffect(() => // collect list of genres
     {
-        api.get('classifications').then(res => setClassificationsList(res.data))
+        api.get('genres').then(res => setGenresList(res.data))
     }, [])
 
     function handleNameInputChange(event: ChangeEvent<HTMLInputElement>)
@@ -69,44 +65,44 @@ const Add = () =>
         setType(value)
     }
 
-    function handleSelectClassification(index: number, event: ChangeEvent<HTMLSelectElement>)
+    function handleSelectGenre(index: number, event: ChangeEvent<HTMLSelectElement>)
     {
-        const classificationId = Number(event.target.value)
-        let classificationName = ''
+        const genreId = event.target.value
+        let genreName = ''
 
-        let values = [...classifications]
-        classificationName = String(classificationsList.map(classification =>
+        let values = [...genres]
+        genreName = String(genresList.map(genre =>
         {
-            if (classification.id === classificationId) return classification.name
+            if (genre.id === genreId) return genre.name
             else return ''
         }))
-        values[index] = {id: classificationId, name: classificationName}
+        values[index] = {id: genreId, name: genreName}
 
-        setClassifications(values)
+        setGenres(values)
     }
 
-    function handleAddClassification()
+    function handleAddGenre()
     {
-        setClassifications([...classifications, defaultClassification])
+        setGenres([...genres, defaultGenre])
     }
 
     async function handleSubmit(event: FormEvent)
     {
         event.preventDefault()
 
-        let classificationIds: number[] = []
-        classifications.map(classification =>
+        let genreIds: string[] = []
+        genres.map(genre =>
         {
-            if (classification.id !== 0) classificationIds.push(classification.id)
+            if (genre.id !== '') genreIds.push(genre.id)
         })
 
-        const data = new FormData()
-        data.append('name', name)
-        if (selectedFile) data.append('image', selectedFile)
-        data.append('isMovie', String(type.isMovie))
-        data.append('isSeries', String(type.isSeries))
-        data.append('isUniverse', String(type.isUniverse))
-        data.append('classifications_ids', classificationIds.join(','))
+        // const data = new FormData()
+        // data.append('name', name)
+        // if (selectedFile) data.append('image', selectedFile)
+        // data.append
+        // data.append('genres', genreIds)
+
+        const data = {name, image: selectedFile ? selectedFile : null, type, genres: genreIds}
 
         await api.post('media', data)
         alert('Media added!')
@@ -156,11 +152,11 @@ const Add = () =>
                     </div>
                     <ul className="classificationSelection">
                         <h2>Classifications</h2>
-                        {classifications.map((classification, index) => (
+                        {genres.map((genre, index) => (
                             <li key={index}>
-                                <select onChange={(event) => handleSelectClassification(index, event)}>
-                                    <option value="0">Choose a classification</option>
-                                    {classificationsList.map(({id, name}) => (
+                                <select onChange={(event) => handleSelectGenre(index, event)}>
+                                    <option value="0">Choose a genre</option>
+                                    {genresList.map(({id, name}) => (
                                         <option key={id} value={id}>
                                             {name}
                                         </option>
@@ -168,7 +164,7 @@ const Add = () =>
                                 </select>
                             </li>
                         ))}
-                        <button type="button" onClick={handleAddClassification}>
+                        <button type="button" onClick={handleAddGenre}>
                             <FiPlusCircle />
                         </button>
                     </ul>

@@ -21,53 +21,51 @@ const defaultCelebrityCharacter =
 
 interface Info
 {
+    id: string
     name: string
     image: string
-    type: string
-    classifications: Array<{id: number, name: string}>
-    celebrities_characters: Array<{celebrity: CelebrityCharacter, character: CelebrityCharacter}>
-}
-
-interface receivedInfo
-{
-    name: string
-    image: string
-    type: {isMovie: boolean, isSeries: boolean, isUniverse: boolean}
-    classifications: Array<{id: number, name: string}>
-    celebrities_characters: Array<{celebrity: CelebrityCharacter, character: CelebrityCharacter}>
+    type?: {isMovie: boolean, isSeries: boolean, isUniverse: boolean}
+    sType?: string
+    genres: Array<{id: number, name: string}>
+    relations: Array<{celebrity: CelebrityCharacter, character: CelebrityCharacter}>
 }
 
 const defaultInfo =
 {
+    id: 'default',
     name: 'default',
     image: 'default',
-    type: 'default',
-    classifications: [{id: 0, name: ''}],
-    celebrities_characters: [{celebrity: defaultCelebrityCharacter, character: defaultCelebrityCharacter}]
+    genres: [{id: 0, name: ''}],
+    relations: [{celebrity: defaultCelebrityCharacter, character: defaultCelebrityCharacter}]
 }
 
 const View = () =>
 {
-    const {id} = useParams()
+    const {id} = useParams<{id: string}>()
     const [info, setInfo] = useState<Info>(defaultInfo)
 
     useEffect(() => // collect media info
     {
         api.get(`/media/${id}`).then(res =>
         {
-            let data: receivedInfo = res.data
-            let type = ''
-            if (data.type.isMovie) type = 'Movie'
-            else if (data.type.isSeries) type = 'Series'
-            else if (data.type.isUniverse) type = 'Universe'
+            let data: Info = res.data
+            let type = 'default'
+
+            if (data.type !== undefined)
+            {
+                if (data.type.isMovie) type = 'Movie'
+                else if (data.type.isSeries) type = 'Series'
+                else if (data.type.isUniverse) type = 'Universe'
+            }
 
             setInfo(
             {
+                id: data.id,
                 name: data.name,
                 image: data.image,
-                type: type,
-                classifications: data.classifications,
-                celebrities_characters: data.celebrities_characters
+                sType: type,
+                genres: data.genres,
+                relations: data.relations
             })
         })
     }, [id])
@@ -82,19 +80,19 @@ const View = () =>
                 <div className="mediaInfo">
                     <h1>{info.name}</h1>
                     <div className="mediaType">
-                        <h2>Type: {info.type}</h2>
+                        <h2>Type: {info.sType}</h2>
                     </div>
                     <ul className="classification">
-                        <h2>Classifications</h2>
-                        {info.classifications.map(classification => (
-                            <li key={classification.id}>
-                                <h3>{classification.name}</h3>
+                        <h2>Genres</h2>
+                        {info.genres.map(genre => (
+                            <li key={genre.id}>
+                                <h3>{genre.name}</h3>
                             </li>
                         ))}
                     </ul>
                     <ul className="celebrityCharacter">
                         <h2>Celebrities & Characters</h2>
-                        {info.celebrities_characters.map(({celebrity, character}) => (
+                        {info.relations.map(({celebrity, character}) => (
                             <li key={`${celebrity.id}-${character.id}`}>
                                 <div className="celebrity">
                                     <img src={celebrity.image} alt={celebrity.name}/>
